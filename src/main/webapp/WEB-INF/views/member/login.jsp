@@ -2,106 +2,72 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
-<style>
-	body {
-		color: #fff;
-		background: #3598dc;
-	}
-	.form-control {
-		min-height: 41px;
-		background: #f2f2f2;
-		box-shadow: none !important;
-		border: transparent;
-	}
-	.form-control:focus {
-		background: #e2e2e2;
-	}
-	.form-control, .btn {        
-        border-radius: 2px;
-    }
-	.login-form {
-		width: 350px;
-		margin: 30px auto;
-		text-align: center;
-	}
-	.login-form h2 {
-        margin: 10px 0 25px;
-    }
-    .login-form form {
-		color: #7a7a7a;
-		border-radius: 3px;
-    	margin-bottom: 15px;
-        background: #fff;
-        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-        padding: 30px;
-    }
-    .login-form .btn {        
-        font-size: 16px;
-        font-weight: bold;
-		background: #3598dc;
-		border: none;
-        outline: none !important;
-    }
-	.login-form .btn:hover, .login-form .btn:focus {
-		background: #2389cd;
-	}
-	.login-form a {
-		color: #fff;
-		text-decoration: underline;
-	}
-	.login-form a:hover {
-		text-decoration: none;
-	}
-	.login-form form a {
-		color: #7a7a7a;
-		text-decoration: none;
-	}
-	.login-form form a:hover {
-		text-decoration: underline;
-	}
-</style>
-  <script type="text/javascript">
-  function login(){
-	  var inputId = document.getElementById("id").value;
-	  var inputPwd = document.getElementById("pwd").value;
-	  if(inputId.length == 0  || inputPwd.length == 0){
-		  alert('로그인 정보를 정확히 입력하세요')
-	  }else{
-		  loginChk.submit();
-	  }
-  }
-  
-  function register(){
-	  location.href="register";
-  }
-  </script>
-</head>
-
-<body>
-	<c:set var="contextPath" value="<%=request.getContextPath()%>"/>
-	<div class="login-form">
-    <form action="loginChk" method="post">
-        <h2 class="text-center">Login</h2>   
-        <div class="form-group has-error">
-        	<input type="text" class="form-control" name="id" placeholder="User ID" required="required">
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Login - SB Admin</title>
+        <link href="/root/resources/css/styles.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="bg-primary">
+    <c:set var="contextPath" value="<%= request.getContextPath()%>"></c:set>
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                                    <div class="card-body">
+                                        <form action="${contextPath}/member/loginChk" method="post">
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="inputId" name="id" type="text" placeholder="Input ID" />
+                                                <label for="inputId">Input ID</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="inputPassword" name="pwd" type="password" placeholder="Password" />
+                                                <label for="inputPassword">Password</label>
+                                            </div>
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" id="rememberID" type="checkbox" value="" />
+                                                <label class="form-check-label" for="rememberID">Remember ID</label>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                                <a class="small" href="${contextPath}/member/findAccount">Forgot Password?</a>
+                                                <input class="btn btn-primary" type="submit" value="Login">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer text-center py-3">
+                                        <div class="small"><a href="${contextPath}/member/register">Need an account? Sign up!</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <div id="layoutAuthentication_footer">
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
-		<div class="form-group">
-            <input type="password" class="form-control" name="pwd" placeholder="Password" required="required">
-        </div>        
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
-        </div>
-        <p><a href="${contextPath}/member/findAccount">Lost your Password?</a></p>
-    </form>
-    <p class="text-center small">Don't have an account? <a href="${contextPath}/member/register">Sign up here!</a></p>
-</div>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/root/resources/js/scripts.js"></script>
+    </body>
 </html>

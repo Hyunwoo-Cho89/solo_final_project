@@ -17,7 +17,10 @@ import com.care.root.member.service.MemberService;
 public class MemberController {
 	@Autowired
 	MemberService ms;
-	
+	@RequestMapping("main")
+	public String main() {
+		return "main";
+	}
 	@RequestMapping("login")
 		public String login() {
 		
@@ -29,10 +32,8 @@ public class MemberController {
 		if(result == 1) {
 			return "main";
 		}else {
-			return "login";
+			return "member/login";
 		}
-		
-		
 	}
 	@RequestMapping("register")
 	public String register() {
@@ -43,5 +44,11 @@ public class MemberController {
 	public String findAccount() {
 		
 		return "member/findAccount";
+	}
+	
+	@PostMapping("memberReg")
+	public String memberReg(){
+		
+		return "member/login";
 	}
 }

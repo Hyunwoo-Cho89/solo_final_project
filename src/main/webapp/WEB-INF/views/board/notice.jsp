@@ -9,9 +9,7 @@
 </head>
 <body>
 <c:set var="contextPath" value="<%= request.getContextPath() %>"/>
-<c:import url="default/header.jsp" />
-<div class="wrap">
+<c:import url="../default/header.jsp" />
 
-</div>
 </body>
 </html>

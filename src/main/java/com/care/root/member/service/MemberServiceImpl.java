@@ -11,7 +11,7 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int loginChk(HttpServletRequest request, HttpSession session) {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 }
