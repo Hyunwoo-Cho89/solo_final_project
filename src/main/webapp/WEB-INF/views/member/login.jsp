@@ -12,8 +12,33 @@
         <title>Login - SB Admin</title>
         <link href="/root/resources/css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+        <script type="text/javascript">
+        function loginChk(){
+        	var id = $('#id').val();
+        	var pwd = $('#pwd').val();
+        	
+        	if(id.length == 0){
+        		alert("ID를 입력하세요");
+        	}else if(pwd.length == 0){
+        		alert("비밀번호를 입력하세요")
+        	}else{
+        		fmt.submit();
+        	}
+        }
+        function cookieChk(){
+        	$(document).ready(function() {
+        	       //아이디저장 체크
+        	      var saveId = getCookie("loginCookie"); //Controller에서 지정한 쿠키값 가져오기
+        	      if(saveId != "") { //쿠키값이 있으면
+        	         $("#id").val(saveId);
+        	         $("#rememberId").prop("checked", true);
+        	       }
+        	    });
+        }
+        </script>
     </head>
-    <body class="bg-primary">
+    <body class="bg-primary" onload="cookieChk()">
     <c:set var="contextPath" value="<%= request.getContextPath()%>"></c:set>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
@@ -24,22 +49,22 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
-                                        <form action="${contextPath}/member/loginChk" method="post">
+                                        <form action="${contextPath}/member/loginChk" id="fmt" method="post">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputId" name="id" type="text" placeholder="Input ID" />
+                                                <input class="form-control" id="id" name="id" type="text" placeholder="Input ID" />
                                                 <label for="inputId">Input ID</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" name="pwd" type="password" placeholder="Password" />
+                                                <input class="form-control" id="pwd" name="pwd" type="password" placeholder="Password" />
                                                 <label for="inputPassword">Password</label>
                                             </div>
                                             <div class="form-check mb-3">
-                                                <input class="form-check-input" id="rememberID" type="checkbox" value="" />
-                                                <label class="form-check-label" for="rememberID">Remember ID</label>
+                                                <input class="form-check-input" id="rememberId" name="rememberId" type="checkbox" value="check" />
+                                                <label class="form-check-label" for="rememberId">Remember ID</label>
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="${contextPath}/member/findAccount">Forgot Password?</a>
-                                                <input class="btn btn-primary" type="submit" value="Login">
+                                                <input class="btn btn-primary" type="button" value="Login" onclick="loginChk()">
                                             </div>
                                         </form>
                                     </div>

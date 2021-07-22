@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.care.root.member.service.MemberService;
 
@@ -27,12 +28,16 @@ public class MemberController {
 		return "member/login";
 	}
 	@PostMapping("loginChk")
-	public String loginChk(HttpServletResponse response, HttpServletRequest request, HttpSession session) {
-		int result = ms.loginChk(request, session);
-		if(result == 1) {
-			return "main";
-		}else {
-			return "member/login";
+	public String loginChk(HttpServletResponse response, HttpServletRequest request,HttpSession session) {
+		int result = ms.loginChk(request, response, session);
+		System.out.println(request.getParameter("id"));
+		System.out.println(request.getParameter("pwd"));
+		System.out.println(request.getParameter("rememberId"));
+		System.out.println(result);
+		if(result == 0) {
+			return "redirect:main";
+		}else{
+			return "redirect:login";
 		}
 	}
 	@RequestMapping("register")
