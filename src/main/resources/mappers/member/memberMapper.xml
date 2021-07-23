@@ -13,6 +13,24 @@
   <select id="loginChk" resultMap="member">
   select * from CMEMBER where id=#{id}
  </select>
+ <select id="idChk" resultType="Integer">
+  select count(*) from CMEMBER where id=#{id}
+ </select>
+  <select id="findId" resultType="String">
+		select id from CMEMBER where name = #{name} and email = #{email}
+	</select>
+	
+	<select id="findPw" resultType="String">
+		select pw from CMEMBER where id = #{id} and email = #{email}
+	</select>
+	
+	<update id="tempPwUdate">
+	update CMEMBER set pw = #{tempPw} where id = #{id}
+	</update>
+ 
+  <insert id="memberReg">
+  insert into CMEMBER (id, name, pw, email) values (#{id}, #{name}, #{pw}, #{email})
+ </insert>
 <!--  <insert id="insertMember">
   insert into test_mybatis values(#{id}, #{name})
  </insert>

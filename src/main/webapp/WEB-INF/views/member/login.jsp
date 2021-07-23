@@ -14,7 +14,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
         <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
         <script type="text/javascript">
-        function loginChk(){
+		function loginChk(){
         	var id = $('#id').val();
         	var pwd = $('#pwd').val();
         	
@@ -29,7 +29,17 @@
         function cookieChk(){
         	$(document).ready(function() {
         	       //아이디저장 체크
-        	      var saveId = getCookie("loginCookie"); //Controller에서 지정한 쿠키값 가져오기
+        	     <%Cookie[] cookies = request.getCookies(); 
+        	       String id = "";
+        	     	if(cookies != null){
+        	     		for(int i =0;i<cookies.length;i++){
+        	     			if(cookies[i].getName() == "loginCookie"){
+        	     				id = cookies[i].getValue();
+        	     			}
+        	     		}
+        	     	}
+        	     %>
+        	     var saveId = "" //Controller에서 지정한 쿠키값 가져오기
         	      if(saveId != "") { //쿠키값이 있으면
         	         $("#id").val(saveId);
         	         $("#rememberId").prop("checked", true);

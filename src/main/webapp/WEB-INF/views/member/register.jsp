@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 <title>Bootstrap Simple Login Form with Blue Background</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 <style>
 	body {
@@ -93,7 +93,38 @@
 </style>
 <script type="text/javascript">
  function idChk(){
-	 
+	 let form = {"id" : $('#id').val()}
+	 $.ajax({
+			url:"idChk", type:"POST", dataType:"json",
+			data:JSON.stringify(form),
+			contentType:"application/json;charset=utf-8",
+			success: function(rep){
+				if(rep.result == '0'){
+					$('#checkId').val('완료');
+				}else{
+					$('#checkId').val('중복 검사 필수');
+					alert('이미 존재하는 아이디 입니다.');
+				}
+			}, error:function(){
+				alert('문제 발생')
+			}
+		})
+ }
+ 
+ function register(){
+	 let id = $('#checkId').val();
+	 let pwd = $('#pwd').val();
+	 let pwd2 = $('#pwd2').val();
+	 if(id != "완료"){
+		 alert("아이디 중복 검사를 완료해 주세요.")
+	 }else{
+		 if(pwd != pwd2){
+			 alert("비밀번호가 일치하지 않습니다.")
+		 }else{
+			fmt.submit();
+		 }
+		 
+	 }
  }
 
 </script>
@@ -101,14 +132,14 @@
 <body>
 <c:set var="contextPath" value="<%=request.getContextPath()%>"/>
 <div class="signup-form">
-    <form action="${contextPath}/member/memberReg" method="post">
+    <form action="${contextPath}/member/memberReg" id="fmt" method="post">
 		<h2>Sign Up</h2>
 		<p>Please fill in this form to create an account!</p>
 		<hr>
         <div class="form-group">
 			<div class="row">
-				<div class="col-xs-6"><input type="text" class="form-control" name="id" placeholder="Input ID" required="required"></div>
-				<div class="col-xs-6"><input type="button" class="btn btn-primary btn-lg" id="idChk" value="중복 검사 필수" onclick="idChk()"></div>
+				<div class="col-xs-6"><input type="text" class="form-control" id="id" name="id" placeholder="Input ID" required="required"></div>
+				<div class="col-xs-6"><input type="button" class="btn btn-primary btn-lg" id="checkId" value="중복 검사 필수" onclick="idChk()"></div>
 			</div>        	
         </div>
         <div class="form-group">
@@ -121,16 +152,16 @@
         	<input type="email" class="form-control" name="email" placeholder="Email" required="required">
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+            <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password" required="required">
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
+            <input type="password" class="form-control" id="pwd2" name="confirm_password" placeholder="Confirm Password" required="required">
         </div>        
         <div class="form-group">
 			<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
 		</div>
 		<div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+            <button type="button" class="btn btn-primary btn-lg" onclick="register()">Sign Up</button>
         </div>
     </form>
 	<div class="hint-text">Already have an account? <a href="${contextPath}/member/login">Login here</a></div>

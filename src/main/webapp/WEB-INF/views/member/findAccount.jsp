@@ -110,6 +110,45 @@
 		text-align: center;
     }
 </style>
+<script type="text/javascript">
+function findId(){
+	 let form = {"name" : $('#name').val(), "email" : $('#idEmail').val()}
+	 $.ajax({
+			url:"findId", type:"POST", dataType:"json",
+			data:JSON.stringify(form),
+			contentType:"application/json;charset=utf-8",
+			success: function(rep){
+				if(rep.result != 'null'){
+					alert('고객님의 아이디는 '+rep.result+'입니다.');
+				}else{
+					alert('찾으시는 아이디가 없습니다. 정보를 정확히 입력하세요');
+				}
+			}, error:function(){
+				alert('문제 발생')
+			}
+		})
+}
+
+function findPwd(){
+	 let form = {"id" : $('#id').val(), "email" : $('#pwdEmail').val()}
+	 $.ajax({
+			url:"findPw", type:"POST", dataType:"json",
+			data:JSON.stringify(form),
+			contentType:"application/json;charset=utf-8",
+			success: function(rep){
+				if(rep.result != 'null'){
+					alert('가입하신 메일로 임시 비밀번호가 전송되었습니다.');
+				}else{
+					alert('찾으시는 가입 정보가 없습니다.');
+				}
+			}, error:function(){
+				alert('문제 발생')
+			}
+		})
+}
+
+
+</script>
 
 </head>
 <body>
